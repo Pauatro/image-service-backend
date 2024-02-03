@@ -14,7 +14,7 @@ app_settings = Settings()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=app_settings.BACKEND_CORS_ORIGINS,
+    allow_origins=app_settings.backend_cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

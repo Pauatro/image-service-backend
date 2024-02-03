@@ -1,9 +1,11 @@
 from sqlalchemy import create_engine, Column, Uuid
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 import uuid
+from shared.settings import Settings
 
-DATABASE_URL = 'postgresql://postgres:postgres@localhost:5432/postgres'
+app_settings = Settings()
 
+DATABASE_URL = f'postgresql://{app_settings.postgres_user}:{app_settings.postgres_password}@{app_settings.postgres_host}:{app_settings.postgres_port}/{app_settings.postgres_db}'
 engine = create_engine(DATABASE_URL)
 
 SessionMakerInstance = sessionmaker(autocommit=False, autoflush=False, bind=engine)

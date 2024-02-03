@@ -1,14 +1,11 @@
 from passlib.context import CryptContext
 import jwt
-from datetime import datetime, timedelta, timezone
-from typing import Optional
 from users.services.users import get_user_by_username
 from users.services.exceptions import UserNotFoundException, IncorrectUsernameOrPasswordException
 import time 
+from shared.settings import Settings
 
-SECRET_KEY = "574387fbcb3fbf0c0e58c893f3a5fe40f6b244480137993adb8a1024f74ade5e"
-ALGORITHM = "HS256"
-
+app_settings = Settings()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def verify_password(plain_password, hashed_password):
@@ -29,7 +26,7 @@ def authenticate_user(username: str, password: str):
 
 def create_access_token(data: dict):
     to_encode = data.copy()
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, app_settings.jwt_secret_key, algorithm=app_settings.jwt_algorithm)
     return encoded_jwt
 
 def get_token_expiration_time(expires_delta_seconds: int):
