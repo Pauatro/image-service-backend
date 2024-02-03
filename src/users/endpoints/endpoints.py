@@ -5,8 +5,6 @@ from users.services.authentication import authenticate_user, create_access_token
 from users.endpoints.schemas import LoginRequestBody, LoginResponseBody
 from datetime import timedelta
 
-ACCESS_TOKEN_EXPIRE_SECONDS = 1800
-
 router = APIRouter()
     
 @router.post("/login")
