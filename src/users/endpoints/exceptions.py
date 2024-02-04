@@ -7,9 +7,3 @@ class IncorrectUsernameOrPasswordHttpException(HTTPException):
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-
-class InternalServerHttpException(HTTPException):
-    def __init__(self):
-        super().__init__(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        )

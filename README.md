@@ -23,9 +23,9 @@ dependencies are specified in the pyproject.toml and the exact versions are in t
 
 To run the backend in development mode, run the following command inside the src folder:
 
-```uvicorn main:app --reload```
+```uvicorn main:app -p 8008 --reload```
 
-The app will run on port 8000.
+The app will run on port 8008.
 
 ## Documentation
 
@@ -36,12 +36,15 @@ Once run locally, API documentation is automatically generated [here](http://loc
 Everything is set up to run the app using docker and docker-compose.
 Since there's two separate repos (frontend and backend), the image for the frontend needs to be generated first. To do that, run the following command in the root folder of the frontend project:
 
-```
-docker build . -t image-service-frontend
-```
+```docker build . -t image-service-frontend```
 
 Then you can just run the docker compose in this project to have everything up and running:
 
-```
-docker compose up -d
-```
+```docker compose up -d```
+
+
+## Logging in
+
+The test user has the following credentials:
+Username: username
+Pwd: password
