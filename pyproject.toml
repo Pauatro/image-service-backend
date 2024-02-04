@@ -6,7 +6,7 @@ authors = ["Pauatro <pauatro@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.12"
 fastapi = "^0.104.1"
 uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
 pydantic-settings = "^2.1.0"
@@ -14,6 +14,10 @@ sqlalchemy = "^2.0.25"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 psycopg2-binary = "^2.9.9"
 pyjwt = "^2.8.0"
+numpy = "^1.26.3"
+gdcm = "^1.1"
+pylibjpeg = "^2.0.0"
+pylibjpeg-libjpeg = "^2.0.2"
 pydicom = "^2.4.4"
 
 
