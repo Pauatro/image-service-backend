@@ -23,9 +23,9 @@ dependencies are specified in the pyproject.toml and the exact versions are in t
 
 To run the backend in development mode, run the following command inside the src folder:
 
-```uvicorn main:app --reload```
+```uvicorn main:app -p 8008 --reload```
 
-The app will run on port 8000.
+The app will run on port 8008.
 
 ## Documentation
 
