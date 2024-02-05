@@ -12,9 +12,12 @@ class Settings(BaseSettings):
     jwt_secret_key: str = "574387fbcb3fbf0c0e58c893f3a5fe40f6b244480137993adb8a1024f74ade5e"
     jwt_algorithm: str = "HS256"
     access_token_expire_seconds: int = 1800
-    image_db_directory = "images/data/assets"
+    image_db_directory: str = "images/data/assets"
     postgres_user: str
     postgres_password: str
     postgres_host: str
     postgres_db: str
     postgres_port: str
+
+    # root is the basic logger, debug is for debugging.
+    logger: str
