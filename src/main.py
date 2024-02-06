@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import logging
 from shared.settings import Settings
@@ -8,7 +8,7 @@ from shared.database import Base, engine
 from users.data.mocks import seed_users_table
 
 # setup loggers
-logging.config.fileConfig('config/logging.conf', disable_existing_loggers=False)
+logging.config.fileConfig("config/logging.conf", disable_existing_loggers=False)
 
 ## In a proper project this would be done using migrations, but works for this case
 Base.metadata.create_all(engine)
