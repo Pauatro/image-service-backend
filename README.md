@@ -75,7 +75,7 @@ The test user has the following credentials:
 
 ## Tests
 
-I just realized that tests need to be run from the main folder (not src), otherwise the images tests will fail to find the mock db. You just need to run the command:
+Tests need to be run from the src folder, otherwise the images tests will fail to find the mock db. You just need to run the command:
 
 ```
 pytest
