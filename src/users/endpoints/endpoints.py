@@ -15,14 +15,19 @@ app_settings = Settings()
 
 
 @router.post("/login")
-async def login_for_access_token(form_data: LoginRequestBody) -> LoginResponseBody:
+async def login(form_data: LoginRequestBody) -> LoginResponseBody:
     try:
         user = get_user_by_username(form_data.username)
         authenticate_user(user, form_data.password)
         access_token_expires = get_token_expiration_time(
             app_settings.access_token_expire_seconds
         )
-        access_token = create_access_token(data={"sub": user.username})
+        access_token = create_access_token(
+            data={
+                "sub": user.username,
+                "exp": access_token_expires,
+            }
+        )
 
         return LoginResponseBody(
             access_token=access_token, expiration_time=access_token_expires
