@@ -2,8 +2,8 @@ import pytest
 import images.services.images as services
 import images.services.exceptions as exceptions
 
-mock_image_db_dir = "tests/mocks/data/images_db"
-mock_empty_image_db_dir = "tests/mocks/data/empty_images_db"
+mock_image_db_dir = "src/tests/mocks/data/images_db"
+mock_empty_image_db_dir = "src/tests/mocks/data/empty_images_db"
 mock_first_set_folder_name = "SE000001"
 mock_first_slice_name = "MR000001"
 
