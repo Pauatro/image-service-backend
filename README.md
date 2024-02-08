@@ -72,3 +72,11 @@ Once run locally, API documentation is automatically generated [here](http://loc
 The test user has the following credentials:
 - Username: username
 - Pwd: password
+
+## Tests
+
+Tests need to be run from the src folder, otherwise the images tests will fail to find the mock db. You just need to run the command:
+
+```
+pytest
+```

@@ -1,4 +1,9 @@
 from sqlalchemy import select
+import jwt
+from datetime import datetime
+from fastapi import Depends
+from fastapi.security import OAuth2PasswordBearer
+from pydantic import ValidationError
 from shared.database import get_db_session
 from shared.logging import get_logger
 from users.data.models import UserModel
@@ -8,7 +13,13 @@ from users.services.exceptions import (
     UserAlreadyExistsException,
     IncorrectUsernameOrPasswordException,
 )
-from users.services.authentication import verify_password
+from users.endpoints.exceptions import (
+    InvalidTokenHttpException,
+    ExpiredTokenHttpException,
+    UserNotFoundHttpException,
+)
+from users.services.authentication import verify_password, decode_access_token
+from users.services.schemas import TokenPayload, User
 
 
 def get_user_by_username(
@@ -61,3 +72,30 @@ def authenticate_user(user: User, password: str, logger=get_logger()):
         return user
     except UserNotFoundException:
         raise IncorrectUsernameOrPasswordException()
+
+
+reusable_oauth = OAuth2PasswordBearer(tokenUrl="/login", scheme_name="JWT")
+
+
+async def get_current_user(
+    token: str = Depends(reusable_oauth), logger=Depends(get_logger)
+) -> User:
+    try:
+        payload = decode_access_token(token)
+        token_data = TokenPayload(**payload)
+
+        if datetime.fromtimestamp(token_data.exp) < datetime.now():
+            logger.warning("Expired bearer token")
+            raise ExpiredTokenHttpException()
+    except (jwt.PyJWTError, ValidationError):
+        logger.warning("Missing or invalid bearer token")
+        raise InvalidTokenHttpException()
+
+    try:
+        user = get_user_by_username(token_data.sub)
+    except UserNotFoundException:
+        logger.info("User in bearer token was not found")
+        raise UserNotFoundHttpException()
+
+    logger.info("User authenticated through bearer token")
+    return user

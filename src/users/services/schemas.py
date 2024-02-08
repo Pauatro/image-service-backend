@@ -22,3 +22,8 @@ class CreateUser(UserBase):
 
 class PostUser(UserBase):
     password: str
+
+
+class TokenPayload(BaseModel):
+    sub: str  # username
+    exp: int  # expiration time
