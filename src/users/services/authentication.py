@@ -18,14 +18,18 @@ def get_password_hash(password):
 def create_access_token(data: dict):
     to_encode = data.copy()
     encoded_jwt = jwt.encode(
-        to_encode, app_settings.jwt_secret_key, algorithm=app_settings.jwt_algorithm
+        to_encode,
+        app_settings.jwt_secret_key,
+        app_settings.jwt_algorithm,
     )
     return encoded_jwt
 
 
 def decode_access_token(token: str):
     return jwt.decode(
-        token, app_settings.jwt_secret_key, algorithm=app_settings.jwt_algorithm
+        token,
+        app_settings.jwt_secret_key,
+        app_settings.jwt_algorithm,
     )
 
 
