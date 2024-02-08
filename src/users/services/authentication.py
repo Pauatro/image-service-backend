@@ -23,5 +23,11 @@ def create_access_token(data: dict):
     return encoded_jwt
 
 
+def decode_access_token(token: str):
+    return jwt.decode(
+        token, app_settings.jwt_secret_key, algorithm=app_settings.jwt_algorithm
+    )
+
+
 def get_token_expiration_time(expires_delta_seconds: int):
     return round(time.time()) + expires_delta_seconds
