@@ -9,6 +9,7 @@ class IncorrectUsernameOrPasswordHttpException(UnauthorizedHttpException):
     def __init__(self):
         super().__init__(
             detail="Incorrect username or password",
+            headers=None
         )
 
 
