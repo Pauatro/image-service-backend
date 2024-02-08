@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     )
     jwt_algorithm: str = "HS256"
     access_token_expire_seconds: int = 1800
-    image_db_directory: str = "images/data/assets"
+    image_db_directory: str = "images/database"
     postgres_user: str
     postgres_password: str
     postgres_host: str
